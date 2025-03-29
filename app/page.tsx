@@ -1,4 +1,4 @@
-import Footer from "@/components/footer";
+import Email from "@/components/email";
 import Hero from "@/components/hero";
 import Main from "@/components/main";
 import Navbar from "@/components/navbar";
@@ -10,8 +10,7 @@ export default function Home() {
       <Navbar/>
       <Hero/>
       <Main/>
-      <Footer/>
-      
+      <Email/>
     </div>
   );
 }
