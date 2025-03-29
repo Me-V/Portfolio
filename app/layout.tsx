@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import { Poppins } from "next/font/google";
+import Navbar from "@/components/navbar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -10,8 +11,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Jhon Portfolio",
-  description: "Created by Jhon Smith",
+  title: "Vasu Sharma",
+  description: "Know Me",
 };
 
 export default function RootLayout({
@@ -25,7 +26,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${poppins.variable} font-poppins antialiased`}
       >
-        {children}
+        <Navbar/>{children}
       </body>
     </html>
   );

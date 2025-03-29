@@ -1,9 +1,6 @@
 "use client";
-import { EnvelopeIcon } from "@heroicons/react/16/solid";
-import { GithubIcon, LinkedInIcon } from "./social-icons";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { div } from "framer-motion/client";
 
 export default function Footer() {
   const [name, setName] = useState("");
@@ -17,6 +14,8 @@ export default function Footer() {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus("");
+    
+    console.log(status)
 
     try {
       const response = await fetch("/api/send", {
@@ -44,23 +43,17 @@ export default function Footer() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-gray-900 via-black to-gray-900">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="flex flex-col items-center mb-14"
       >
-        <h2
-          className="text-4xl md:text-5xl font-bold
-                    text-content mb-4 text-center"
-        >
+        <h2 className="text-4xl md:text-5xl font-bold text-content lg:mt-24 mb-4 text-center">
           Let&apos;s Connect
         </h2>
-        <div
-          className="w-24 h-1 bg-gradient-to-r from-primary
-                    to-tertiary rounded-full"
-        />
+        <div className="w-24 h-1 bg-gradient-to-r from-primary to-tertiary rounded-full" />
       </motion.div>
 
       {emailSubmitted === true ? (
@@ -119,12 +112,23 @@ export default function Footer() {
               required
             />
           </div>
+
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-black w-fit ml-16 lg:ml-80"
+            className="btn ml-7 lg:ml-72"
           >
-            {isSubmitting ? "Sending..." : "Send Message"}
+            <strong className="lg:text-2xl">
+              {isSubmitting ? "Sending..." : "Send"}
+            </strong>
+            <div id="container-stars">
+              <div id="stars"></div>
+            </div>
+
+            <div id="glow">
+              <div className="circle"></div>
+              <div className="circle"></div>
+            </div>
           </button>
         </form>
       )}

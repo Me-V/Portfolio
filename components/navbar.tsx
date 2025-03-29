@@ -4,11 +4,11 @@ import { useState } from 'react';
 import MenuItem  from './menu-items';
 import { GithubIcon, LinkedInIcon } from './social-icons';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 const navItems = [
-  { name: 'Projects', href: '#work' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Contact', href: '/email' },
 ];
 
 const socialLinks = {
@@ -38,7 +38,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
           {/* Logo Section */}
-          <motion.div
+          <Link href="/"><motion.div
             whileHover={{ scale: 1.05 }}
             className="flex items-center gap-2 group"
           >
@@ -54,7 +54,7 @@ export default function Navbar() {
             <span className="font-semibold text-content/90 group-hover:text-primary transition-colors">
               Vasu Sharma
             </span>
-          </motion.div>
+          </motion.div></Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
