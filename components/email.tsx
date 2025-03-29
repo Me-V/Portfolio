@@ -10,7 +10,7 @@ export default function Footer() {
   const [status, setStatus] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus("");
@@ -36,6 +36,7 @@ export default function Footer() {
       }
     } catch (error) {
       setStatus("An error occurred. Please try again.");
+      console.log(error)
     } finally {
       setIsSubmitting(false);
       setEmailSubmitted(true);
@@ -50,7 +51,7 @@ export default function Footer() {
         transition={{ duration: 0.6 }}
         className="flex flex-col items-center mb-14"
       >
-        <h2 className="text-4xl md:text-5xl font-bold text-content lg:mt-24 mb-4 text-center">
+        <h2 className="text-4xl md:text-5xl font-bold text-content mt-24 mb-4 text-center">
           Let&apos;s Connect
         </h2>
         <div className="w-24 h-1 bg-gradient-to-r from-primary to-tertiary rounded-full" />
@@ -118,7 +119,7 @@ export default function Footer() {
             disabled={isSubmitting}
             className="btn ml-7 lg:ml-72"
           >
-            <strong className="lg:text-2xl">
+            <strong className="text-xl lg:text-2xl">
               {isSubmitting ? "Sending..." : "Send"}
             </strong>
             <div id="container-stars">

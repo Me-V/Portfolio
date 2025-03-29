@@ -1,14 +1,14 @@
 'use client';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useState } from 'react';
-import MenuItem  from './menu-items';
+import MenuItem from './menu-items';
 import { GithubIcon, LinkedInIcon } from './social-icons';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 const navItems = [
-  { name: 'Projects', href: '/projects' },
-  { name: 'Contact', href: '/email' },
+  { name: 'Projects', href: 'projects' },
+  { name: 'Contact', href: 'email' },
 ];
 
 const socialLinks = {
@@ -38,23 +38,24 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
           {/* Logo Section */}
-          <Link href="/"><motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-2 group"
-          >
-            <div className="relative h-8 w-8 rounded-full overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-tertiary animate-spin-slow [mask-image:linear-gradient(transparent,white)]" />
-              <div className="absolute inset-[2px] bg-background rounded-full flex items-center justify-center">
-                <span className="font-bold bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent">
-                  VS
-                </span>
+          <Link href="/">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center gap-2 group"
+            >
+              <div className="relative h-8 w-8 rounded-full overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary to-tertiary animate-spin-slow [mask-image:linear-gradient(transparent,white)]" />
+                <div className="absolute inset-[2px] bg-background rounded-full flex items-center justify-center">
+                  <span className="font-bold bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent">
+                    VS
+                  </span>
+                </div>
               </div>
-
-            </div>
-            <span className="font-semibold text-content/90 group-hover:text-primary transition-colors">
-              Vasu Sharma
-            </span>
-          </motion.div></Link>
+              <span className="font-semibold text-content/90 group-hover:text-primary transition-colors">
+                Vasu Sharma
+              </span>
+            </motion.div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
@@ -110,7 +111,7 @@ export default function Navbar() {
             className="md:hidden mt-4 pb-4 space-y-4"
           >
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
@@ -118,7 +119,7 @@ export default function Navbar() {
                 rounded-lg transition-colors"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
             <div className="pt-4 border-t border-white/5 flex gap-4">
               <a
