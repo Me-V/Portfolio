@@ -10,7 +10,6 @@ import {
 import { BsDatabaseGear } from "react-icons/bs";
 import { TbBrandSentry } from "react-icons/tb";
 import Image from "next/image";
-import { ArrowUpRightIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import Skills from "./Skills";
 
@@ -37,6 +36,7 @@ const projects = [
       { name: "Clerk", icon: SiClerk, color: "#3178C6" },
     ],
     image: "/projects/project1.png",
+    link: "https://livelydocs.vercel.app",
   },
   {
     title: "Snap Aura",
@@ -48,6 +48,7 @@ const projects = [
       { name: "Mongo DB", icon: SiMongodb, color: "#339933" },
     ],
     image: "/projects/project2.png",
+    link: "https://snapaura.vercel.app",
   },
   {
     title: "Cloud Aura",
@@ -60,6 +61,7 @@ const projects = [
       { name: "Clerk", icon: SiClerk, color: "#3178C6" },
     ],
     image: "/projects/project3.png",
+    link: "https://cloudaura.vercel.app",
   },
 ];
 
@@ -96,61 +98,65 @@ export default function Main() {
           {/* Project Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
             {projects.map((project, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                className="group relative h-[500px] rounded-3xl overflow-hidden bg-surface border border-white/10 cursor-pointer"
-              >
-                {/* Image Section */}
+              <a key={i} href={project.link} target="_blank" rel="noopener noreferrer">
                 <motion.div
-                  className="h-[250px] relative"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
+                  key={i}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  whileHover={{ y: -10, transition: { duration: 0.2 } }}
+                  className="group relative h-[500px] rounded-3xl overflow-hidden bg-surface border border-white/10 cursor-pointer"
                 >
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover"
-                    priority
-                  />
-                </motion.div>
+                  {/* Image Section */}
+                  <motion.div
+                    className="h-[250px] relative"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                      priority
+                    />
+                  </motion.div>
 
-                {/* Content Section */}
-                <motion.div
-                  className="p-6 h-[25px] bg-surface"
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="flex justify-between items-start mb-4 group/title">
-                    <h3 className="text-2xl font-bold text-content">
-                      {project.title}
-                    </h3>
-                    <ArrowUpRightIcon className="h-6 w-6 text-content/50 group-hover/title:text-primary transition-colors duration-300" />
-                  </div>
-                  <p className="text-content/80 mb-4">{project.description}</p>
+                  {/* Content Section */}
+                  <motion.div
+                    className="p-6 h-[25px] bg-surface"
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="flex justify-between items-start mb-4 group/title">
+                      <h3 className="text-2xl font-bold text-content">
+                        {project.title}
+                      </h3>
+                      <span className="text-green-600 glow">Live</span>
+                    </div>
+                    <p className="text-content/80 mb-4">
+                      {project.description}
+                    </p>
 
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech, j) => (
-                      <span
-                        key={j}
-                        className="px-3 py-1 rounded-full bg-white/5 text-content/80 text-sm border border-white/5 hover:bg-surface transition-colors flex items-center gap-1.5 group/tech"
-                      >
-                        <tech.icon
-                          style={{ color: tech.color }}
-                          className="w-4 h-4 transition-colors"
-                        />
-                        <span className="group-hover/tech:text-content transition-colors">
-                          {tech.name}
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech, j) => (
+                        <span
+                          key={j}
+                          className="px-3 py-1 rounded-full bg-white/5 text-content/80 text-sm border border-white/5 hover:bg-surface transition-colors flex items-center gap-1.5 group/tech"
+                        >
+                          <tech.icon
+                            style={{ color: tech.color }}
+                            className="w-4 h-4 transition-colors"
+                          />
+                          <span className="group-hover/tech:text-content transition-colors">
+                            {tech.name}
+                          </span>
                         </span>
-                      </span>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
+              </a>
             ))}
           </div>
 

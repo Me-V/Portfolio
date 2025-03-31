@@ -399,3 +399,10 @@ strong {
   opacity: 0.6;
   transform: translate(10px, -10px);
 }
+
+.glow {
+  text-shadow:
+    0 0 10px rgba(0, 255, 0, 0.8),
+    0 0 20px rgba(0, 255, 0, 0.6),
+    0 0 30px rgba(0, 255, 0, 0.4);
+}
