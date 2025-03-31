@@ -320,8 +320,8 @@ strong {
 
 @media (max-width: 600px) {
   .svg {
-    height: 72px;
-    width: 72px;
+    height: 64px;
+    width: 64px;
   }
 }
 
