@@ -15,41 +15,43 @@ import {
 import { SiMongodb, SiPrisma, SiAppwrite } from "react-icons/si";
 import { TbDatabase } from "react-icons/tb";
 
-const Random = () => {
+const Skills = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900">
+    <div className="flex flex-col md:flex-row  justify-center mb-32 bg-transparent">
       <div
         id="border1"
-        className="card p-8 h-[40vh] w-[20vw] bg-gray-800 rounded-2xl shadow-lg text-white flex flex-col"
+        className="card mt-10 lg:mt-0 p-8 h-[60vh] w-[90vw] lg:h-[67vh] lg:w-[38vw] bg-gray-800 rounded-2xl shadow-lg text-white flex flex-col ml-4 lg:ml-0"
       >
         <h2 className="text-3xl pt-2 font-bold text-center mb-4">Languages</h2>
 
         <div className="grid grid-cols-3 gap-5 place-items-center flex-grow">
-          <TbBrandCpp className="text-blue-500 text-5xl" />
-          <SiJavascript className="text-yellow-400 text-5xl" />
-          <SiPython className="text-blue-400 text-5xl" />
-          <SiTypescript className="text-blue-600 text-5xl" />
-          <SiHtml5 className="text-orange-500 text-5xl" />
-          <SiCss3 className="text-blue-500 text-5xl" />
+          <TbBrandCpp className="text-blue-500 text-5xl lg:text-7xl" />
+          <SiJavascript className="text-yellow-400 text-5xl lg:text-7xl" />
+          <SiPython className="text-blue-400 text-5xl lg:text-7xl" />
+          <SiTypescript className="text-blue-600 text-5xl lg:text-7xl" />
+          <SiHtml5 className="text-orange-500 text-5xl lg:text-7xl" />
+          <SiCss3 className="text-blue-500 text-5xl lg:text-7xl" />
         </div>
       </div>
 
+      {/* The second box */}
+
       <div
         id="border2"
-        className="card ml-20 h-[50vh] w-[25vw] p-8 bg-gray-800 rounded-2xl shadow-lg text-white"
+        className="card mt-16 mb-10 lg:mb-0 lg:mt-0 h-[60vh] w-[90vw] lg:h-[67vh] lg:w-[38vw] p-8 bg-gray-800 rounded-2xl shadow-lg text-white ml-4 lg:ml-20"
       >
         <h2 className="text-2xl pt-6 font-bold text-center mb-6">
           Web Related Stuff
         </h2>
 
         {/* Grid layout for icons */}
-        <div className="grid grid-cols-3 gap-x-2 gap-y-6 gap place-items-center">
+        <div className="grid grid-cols-3  gap-y-10 lg:gap-y-12 gap place-items-center">
           <div className="iso-pro">
             <span></span>
             <span></span>
             <span></span>
 
-            <SiMongodb className="text-green-500 text-5xl svg" />
+            <SiMongodb className="text-green-500 svg" />
 
             <div className="text">Mongo DB</div>
           </div>
@@ -131,4 +133,4 @@ const Random = () => {
   );
 };
 
-export default Random;
+export default Skills;

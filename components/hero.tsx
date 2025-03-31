@@ -47,8 +47,8 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 1.1 }}
               className="text-xl text-content/80 mb-8"
             >
-              Specializing in React, Node.js, and Cloud Architecture. Building
-              scalable applications with modern tech stacks.
+              Weaving Neural Networks and React Frameworks into Powerful
+              Solutions that Bridge Innovation and Purpose
             </motion.p>
 
             <Link href="/resume2.pdf" target="_blank">

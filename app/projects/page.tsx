@@ -1,10 +1,12 @@
-import Main from '@/components/main'
-import React from 'react'
+import Main from "@/components/main";
+import React from "react";
 
 const projects = () => {
   return (
-    <div><Main/></div>
-  )
-}
+    <div>
+      <Main />
+    </div>
+  );
+};
 
-export default projects
+export default projects;
