@@ -75,18 +75,18 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-6xl md:text-8xl font-bold bg-gradient-to-r
+              className="text-4xl md:text-8xl font-bold bg-gradient-to-r
                 from-primary via-secondary to-tertiary 
                 bg-clip-text text-transparent mb-6"
             >
-              Vasu
+              Vasu <span className="inline-block lg:hidden">Sharma</span>
               <br />
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
                 className="bg-gradient-to-r from-primary via-secondary
-                to-tertiary bg-clip-text text-transparent"
+                to-tertiary bg-clip-text text-transparent hidden lg:block"
               >
                 Sharma
               </motion.span>
@@ -96,7 +96,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.1 }}
-              className="text-xl text-content/80 mb-8"
+              className="text-base lg:text-xl text-content/80 mb-8"
             >
               Weaving Neural Networks and React Frameworks into Powerful
               Solutions that Bridge Innovation and Purpose

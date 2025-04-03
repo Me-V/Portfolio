@@ -320,8 +320,8 @@ strong {
 
 @media (max-width: 600px) {
   .svg {
-    height: 64px;
-    width: 64px;
+    height: 62px;
+    width: 62px;
   }
 }
 
@@ -356,6 +356,13 @@ strong {
   transform: translate(25px, -2px) skew(-5deg);
 }
 
+@media (max-width: 600px) {
+  .iso-pro:hover .text {
+    opacity: 1;
+    transform: translate(2px, -2px) skew(0deg);
+  }
+}
+
 .iso-pro:hover .svg {
   transform: translate(5px, -5px);
 }
@@ -377,8 +384,8 @@ strong {
 
 @media (max-width: 600px) {
   .iso-pro span {
-    height: 72px;
-    width: 72px;
+    height: 62px;
+    width: 62px;
   }
 }
 

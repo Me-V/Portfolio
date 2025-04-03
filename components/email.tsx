@@ -117,7 +117,7 @@ export default function Footer() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="btn ml-7 lg:ml-72"
+            className="btn ml-7 lg:ml-72 mt-10"
           >
             <strong className="text-xl lg:text-2xl">
               {isSubmitting ? "Sending..." : "Send"}
