@@ -102,7 +102,7 @@ export default function Hero() {
               Solutions that Bridge Innovation and Purpose
             </motion.p>
 
-            <Link href="/resume2.pdf" target="_blank">
+            <Link href="/Resume.pdf" target="_blank">
               <motion.button
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
