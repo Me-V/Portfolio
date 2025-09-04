@@ -11,7 +11,7 @@ import { BsDatabaseGear } from "react-icons/bs";
 import { TbBrandSentry } from "react-icons/tb";
 import Image from "next/image";
 import Link from "next/link";
-import Skills from "./Skills";
+import SkillsSection from "./skills2";
 
 // Background styling applied
 const containerStyle = {
@@ -73,14 +73,21 @@ export default function Main() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center mb-10"
+          className="flex flex-col items-center mb-6"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-content mb-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-content mb-4 mt-3 text-center">
             Skills
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-tertiary rounded-full" />
         </motion.div>
-        <Skills />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          // className="flex flex-col items-center mb-10"
+        >
+          <SkillsSection />
+        </motion.div>
         <div className="max-w-7xl mx-auto px-6">
           {/* Section Heading */}
           <motion.div
@@ -98,7 +105,12 @@ export default function Main() {
           {/* Project Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
             {projects.map((project, i) => (
-              <a key={i} href={project.link} target="_blank" rel="noopener noreferrer">
+              <a
+                key={i}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 50 }}

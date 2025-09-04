@@ -11,9 +11,9 @@ export default {
       colors: {
         background: '#0a0a0a',
         surface: '#1a1a1a',
-        primary: '#0ea5e9',  
-        secondary: '#8b5cf6',
-        tertiary: '#ec4899',
+        primary: '#8B5CF6',     // Purple
+        secondary: '#EC4899',   // Pink
+        tertiary: '#3B82F6',    // Blue
         content: '#fafafa',
       },
       backgroundImage: {
