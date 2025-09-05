@@ -14,8 +14,8 @@ export default function Footer() {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus("");
-    
-    console.log(status)
+
+    console.log(status);
 
     try {
       const response = await fetch("/api/send", {
@@ -36,7 +36,7 @@ export default function Footer() {
       }
     } catch (error) {
       setStatus("An error occurred. Please try again.");
-      console.log(error)
+      console.log(error);
     } finally {
       setIsSubmitting(false);
       setEmailSubmitted(true);

@@ -117,7 +117,7 @@ export default function Main() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: i * 0.1 }}
                   whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                  className="group relative h-[500px] rounded-3xl overflow-hidden bg-surface border border-white/10 cursor-pointer"
+                  className="group relative h-[500px] rounded-3xl overflow-hidden bg-surface border border-white/10 cursor-pointer my-class"
                 >
                   {/* Image Section */}
                   <motion.div
@@ -137,7 +137,7 @@ export default function Main() {
 
                   {/* Content Section */}
                   <motion.div
-                    className="p-6 h-[25px] bg-surface"
+                    className="p-6 h-[25px] bg-surface my-class"
                     transition={{ duration: 0.3 }}
                   >
                     <div className="flex justify-between items-start mb-4 group/title">
