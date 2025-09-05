@@ -10,24 +10,28 @@ export default function CustomCursor() {
       setPos({ x: e.clientX, y: e.clientY });
     };
 
-    const handleHover = () => setHovered(true);
-    const handleLeave = () => setHovered(false);
+    const handleOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest("a, button, .cursor-hover")) {
+        setHovered(true);
+      }
+    };
+
+    const handleOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest("a, button, .cursor-hover")) {
+        setHovered(false);
+      }
+    };
 
     window.addEventListener("mousemove", handleMove);
-
-    // Detect hover over clickable things
-    const clickable = document.querySelectorAll("a, button, .cursor-hover");
-    clickable.forEach((el) => {
-      el.addEventListener("mouseenter", handleHover);
-      el.addEventListener("mouseleave", handleLeave);
-    });
+    document.addEventListener("mouseover", handleOver);
+    document.addEventListener("mouseout", handleOut);
 
     return () => {
       window.removeEventListener("mousemove", handleMove);
-      clickable.forEach((el) => {
-        el.removeEventListener("mouseenter", handleHover);
-        el.removeEventListener("mouseleave", handleLeave);
-      });
+      document.removeEventListener("mouseover", handleOver);
+      document.removeEventListener("mouseout", handleOut);
     };
   }, []);
 
@@ -39,8 +43,10 @@ export default function CustomCursor() {
       }}
     >
       <div
-        className={`transition-all duration-150 rounded-full border-2 
-        ${hovered ? "w-10 h-10 border-pink-500 bg-pink-500/20" : "w-6 h-6 border-primary bg-primary/30"}`}
+        className={`transition-all duration-150 rounded-full border-2
+        ${hovered
+          ? "w-10 h-10 border-pink-500 bg-pink-500/20"
+          : "w-6 h-6 border-primary bg-primary/30"}`}
       />
     </div>
   );
