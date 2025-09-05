@@ -4,8 +4,15 @@ import { useEffect, useState } from "react";
 export default function CustomCursor() {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    // detect touch device
+    if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
+      setIsTouchDevice(true);
+      return; // stop running cursor logic on mobile
+    }
+
     const handleMove = (e: MouseEvent) => {
       setPos({ x: e.clientX, y: e.clientY });
     };
@@ -35,6 +42,9 @@ export default function CustomCursor() {
     };
   }, []);
 
+  // 🚫 Don't render cursor on mobile/touch devices
+  if (isTouchDevice) return null;
+
   return (
     <div
       className="fixed top-0 left-0 z-[9999] pointer-events-none"
@@ -44,9 +54,11 @@ export default function CustomCursor() {
     >
       <div
         className={`transition-all duration-150 rounded-full border-2
-        ${hovered
-          ? "w-8 h-8 border-pink-500 bg-pink-500/20"
-          : "w-6 h-6 border-primary bg-primary/30"}`}
+        ${
+          hovered
+            ? "w-8 h-8 border-pink-500 bg-pink-500/20"
+            : "w-6 h-6 border-primary bg-primary/30"
+        }`}
       />
     </div>
   );
