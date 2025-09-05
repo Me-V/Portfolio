@@ -24,6 +24,7 @@ import {
   FaTools,
   FaGithub,
   FaChrome,
+  FaCaretDown,
 } from "react-icons/fa";
 import {
   TbApi,
@@ -32,26 +33,53 @@ import {
   TbBrandReactNative,
   TbBrandRedux,
 } from "react-icons/tb";
-import {
-  IoCodeSlash,
-  IoServer,
-} from "react-icons/io5";
+import { IoCodeSlash, IoServer } from "react-icons/io5";
 import { GrDeploy } from "react-icons/gr";
 import { VscVscode } from "react-icons/vsc";
 
 const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState("languages");
   const [isAnimating, setIsAnimating] = useState(false);
-  const [bubbleConfigs, setBubbleConfigs] = useState<{ [key: string] : { id: number; size: number; left: number; animationDuration: number; animationDelay: number; top: number; }[] }>(
-    {}
-  );
+  const [bubbleConfigs, setBubbleConfigs] = useState<{
+    [key: string]: {
+      id: number;
+      size: number;
+      left: number;
+      animationDuration: number;
+      animationDelay: number;
+      top: number;
+    }[];
+  }>({});
   const [backendSlide, setBackendSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     setIsAnimating(true);
 
+    // Check if mobile device
+    const checkIsMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (!mobile) {
+        setIsDropdownOpen(false); // Close dropdown on desktop
+      }
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+
     // Generate consistent bubble configurations based on skill names
-    const configs: { [key: string]: { id: number; size: number; left: number; animationDuration: number; animationDelay: number; top: number; }[] } = {};
+    const configs: {
+      [key: string]: {
+        id: number;
+        size: number;
+        left: number;
+        animationDuration: number;
+        animationDelay: number;
+        top: number;
+      }[];
+    } = {};
     Object.keys(skillCategories).forEach((category) => {
       skillCategories[category].forEach((skill) => {
         // Use skill name as seed for consistent random values
@@ -62,6 +90,8 @@ const SkillsSection = () => {
       });
     });
     setBubbleConfigs(configs);
+
+    return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
   const skillCategories: {
@@ -158,11 +188,6 @@ const SkillsSection = () => {
         name: "Docker",
         level: 70,
         icon: <IoServer className="text-blue-400" />,
-      },
-      {
-        name: "AWS",
-        level: 65,
-        icon: <IoServer className="text-orange-500" />,
       },
       {
         name: "Prisma and Mongoose",
@@ -285,11 +310,11 @@ const SkillsSection = () => {
 
   // Handle backend carousel navigation
   const nextBackendSlide = () => {
-    setBackendSlide((prev) => (prev + 1) % 3); // 0 or 1 (3 slides)
+    setBackendSlide((prev) => (prev + 1) % 2); // 0 or 1 (3 slides)
   };
 
   const prevBackendSlide = () => {
-    setBackendSlide((prev) => (prev - 1 + 3) % 3); // 0 or 1 (3 slides)
+    setBackendSlide((prev) => (prev - 1 + 2) % 2); // 0 or 1 (3 slides)
   };
 
   // Get current backend skills for the active slide
@@ -300,11 +325,43 @@ const SkillsSection = () => {
     return backendSkills.slice(startIndex, startIndex + skillsPerSlide);
   };
 
+  // Get current category name for display
+  const getCategoryName = (category: string) => {
+    switch (category) {
+      case "languages":
+        return "Languages";
+      case "frontend":
+        return "Frontend";
+      case "backend":
+        return "Backend";
+      case "ai/ml":
+        return "Tools";
+      default:
+        return category;
+    }
+  };
+
+  // Get current category icon for display
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case "languages":
+        return <IoCodeSlash />;
+      case "frontend":
+        return <FaReact />;
+      case "backend":
+        return <IoServer />;
+      case "ai/ml":
+        return <FaTools />;
+      default:
+        return <IoCodeSlash />;
+    }
+  };
+
   return (
     <section className="bg-transparent text-white pb-20 pt-10 px-4 md:px-8">
       <div className="container mx-auto max-w-6xl">
-        {/* Glassmorphic Category Selector */}
-        <div className="flex justify-center mb-14">
+        {/* Desktop: Glassmorphic Category Selector */}
+        <div className="hidden md:flex justify-center mb-14">
           <GlassRadioGroup>
             <input
               type="radio"
@@ -370,10 +427,55 @@ const SkillsSection = () => {
           </GlassRadioGroup>
         </div>
 
+        {/* Mobile: Dropdown Menu */}
+        <div className="md:hidden flex justify-center mb-8">
+          <div className="relative w-full max-w-xs">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="w-full flex items-center justify-between px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              <div className="flex items-center">
+                <span className="mr-2 text-lg">
+                  {getCategoryIcon(activeCategory)}
+                </span>
+                <span>{getCategoryName(activeCategory)}</span>
+              </div>
+              <FaCaretDown
+                className={`transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+
+            {isDropdownOpen && (
+              <div className="absolute z-50 w-full mt-1 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
+                {Object.keys(skillCategories).map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => {
+                      setActiveCategory(category);
+                      setBackendSlide(0);
+                      setIsDropdownOpen(false);
+                    }}
+                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-gray-700 transition-colors ${
+                      activeCategory === category
+                        ? "bg-purple-900 text-white"
+                        : "text-gray-200"
+                    }`}
+                  >
+                    <span className="mr-2 text-lg">
+                      {getCategoryIcon(category)}
+                    </span>
+                    <span>{getCategoryName(category)}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* Skills Grid */}
         <div className="relative">
           {activeCategory === "backend" && (
-            <div className="absolute -top-12 right-0 flex space-x-2">
+            <div className="absolute -top-2 md:-top-12 right-0 flex space-x-2 mb-0 md:mb-12">
               <button
                 onClick={prevBackendSlide}
                 className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
@@ -421,7 +523,7 @@ const SkillsSection = () => {
           {activeCategory === "backend" && (
             <div className="flex justify-center mt-6">
               <div className="flex space-x-2">
-                {[0, 1, 2].map((index) => (
+                {[0, 1].map((index) => (
                   <button
                     key={index}
                     className={`w-3 h-3 rounded-full ${
@@ -469,7 +571,7 @@ const SkillsSection = () => {
   );
 };
 
-// Styled component for the glassmorphic radio group
+// Styled component for the glassmorphic radio group (desktop only)
 const GlassRadioGroup = styled.div`
   display: flex;
   position: relative;
@@ -495,7 +597,6 @@ const GlassRadioGroup = styled.div`
     min-width: 100px;
     font-size: 14px;
     padding: 0.8rem 1.2rem;
-    cursor: pointer;
     font-weight: 600;
     letter-spacing: 0.3px;
     color: #e5e5e5;

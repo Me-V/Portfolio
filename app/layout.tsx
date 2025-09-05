@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import Navbar from "@/components/navbar";
+import CustomCursor from "@/components/CustomCursor";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${poppins.variable} font-poppins antialiased`}
       >
+        <CustomCursor />
         <Navbar/>{children}
       </body>
     </html>

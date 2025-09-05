@@ -33,7 +33,7 @@ export default function Navbar() {
       className={`fixed w-full z-50 ${isScrolled
         ? 'backdrop-blur-2xl bg-background/90 shadow-2xl shadow-primary/10'
         : 'backdrop-blur-lg bg-background/50'
-        } transition-all duration-300 ease-out`}
+        } transition-all duration-300 ease-out my-nav`}
     >
       <div className="max-w-7xl mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
