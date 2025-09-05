@@ -356,6 +356,8 @@ const SkillsSection = () => {
         return <IoCodeSlash />;
     }
   };
+  
+  console.log(isMobile)
 
   return (
     <section className="bg-transparent text-white pb-20 pt-10 px-4 md:px-8">
