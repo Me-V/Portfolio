@@ -375,7 +375,7 @@ const SkillsSection = () => {
                 setBackendSlide(0);
               }}
             />
-            <label htmlFor="glass-languages">
+            <label htmlFor="glass-languages" className="cursor-hover">
               <IoCodeSlash className="mr-2" />
               Languages
             </label>
@@ -390,7 +390,7 @@ const SkillsSection = () => {
                 setBackendSlide(0);
               }}
             />
-            <label htmlFor="glass-frontend">
+            <label htmlFor="glass-frontend" className="cursor-hover">
               <IoCodeSlash className="mr-2" />
               Frontend
             </label>
@@ -405,7 +405,7 @@ const SkillsSection = () => {
                 setBackendSlide(0);
               }}
             />
-            <label htmlFor="glass-backend">
+            <label htmlFor="glass-backend" className="cursor-hover">
               <IoServer className="mr-2" />
               Backend
             </label>
@@ -420,7 +420,7 @@ const SkillsSection = () => {
                 setBackendSlide(0);
               }}
             />
-            <label htmlFor="glass-ai-ml">
+            <label htmlFor="glass-ai-ml" className="cursor-hover">
               <FaTools className="mr-2" />
               Tools
             </label>

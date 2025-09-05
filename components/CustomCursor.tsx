@@ -45,7 +45,7 @@ export default function CustomCursor() {
       <div
         className={`transition-all duration-150 rounded-full border-2
         ${hovered
-          ? "w-10 h-10 border-pink-500 bg-pink-500/20"
+          ? "w-8 h-8 border-pink-500 bg-pink-500/20"
           : "w-6 h-6 border-primary bg-primary/30"}`}
       />
     </div>
