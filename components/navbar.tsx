@@ -7,6 +7,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 const navItems = [
+  { name: 'Education', href: 'edu' },
   { name: 'Projects', href: 'projects' },
   { name: 'Contact', href: 'email' },
 ];

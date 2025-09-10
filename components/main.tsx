@@ -6,14 +6,21 @@ import {
   SiCloudinary,
   SiNextdotjs,
   SiTypescript,
+  SiExpress,
 } from "react-icons/si";
 import { BsDatabaseGear } from "react-icons/bs";
-import { TbBrandSentry } from "react-icons/tb";
+import { TbBrandReactNative, TbBrandSentry } from "react-icons/tb";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import SkillsSection from "./skills2";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaGithub,
+  FaNodeJs,
+} from "react-icons/fa";
 
-// Background styling applied
 const containerStyle = {
   width: "100%",
   height: "100%",
@@ -37,6 +44,7 @@ const projects = [
     ],
     image: "/projects/project1.png",
     link: "https://livelydocs.vercel.app",
+    isLive: true,
   },
   {
     title: "Snap Aura",
@@ -49,6 +57,7 @@ const projects = [
     ],
     image: "/projects/project2.png",
     link: "https://snapaura.vercel.app",
+    isLive: true,
   },
   {
     title: "Cloud Aura",
@@ -62,13 +71,57 @@ const projects = [
     ],
     image: "/projects/project3.png",
     link: "https://cloudaura.vercel.app",
+    isLive: true,
+  },
+  {
+    title: "Words Heaven",
+    description: "Cross-platform app with personalized book recommendations",
+    tech: [
+      { name: "MongoDB", icon: SiMongodb, color: "#55c96e" },
+      { name: "Express", icon: SiExpress, color: "#fafafa" },
+      { name: "React Native", icon: TbBrandReactNative, color: "#3178C6" },
+      { name: "Node.js", icon: FaNodeJs, color: "#55c96e" },
+    ],
+    image: "/projects/project4.png",
+    link: "https://github.com/Me-V/Books-App-ReactNative-Expo",
+    isLive: false,
   },
 ];
 
 export default function Main() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const itemsPerView = 3;
+  const totalProjects = projects.length;
+
+  const nextProject = () => {
+    if (currentIndex + itemsPerView < totalProjects) {
+      setCurrentIndex((prev) => prev + itemsPerView);
+    }
+  };
+
+  const prevProject = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex((prev) => prev - itemsPerView);
+    }
+  };
+
+  // Get visible slice without wrap-around
+  const visibleProjects = projects.slice(
+    currentIndex,
+    currentIndex + itemsPerView
+  );
+
+  // Fill empty slots if fewer than 3
+  const filledProjects = [
+    ...visibleProjects,
+    ...Array(itemsPerView - visibleProjects.length).fill(null),
+  ];
+
   return (
     <div style={containerStyle}>
-      <section className="pt-24 pb-16 relative id='work'">
+      <section className="pt-24 pb-5 relative id='work'">
+        {/* Skills Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -80,21 +133,15 @@ export default function Main() {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-tertiary rounded-full" />
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          // className="flex flex-col items-center mb-10"
-        >
-          <SkillsSection />
-        </motion.div>
+        <SkillsSection />
+
+        {/* Projects Section */}
         <div className="max-w-7xl mx-auto px-6">
-          {/* Section Heading */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col items-center mb-20"
+            className="flex flex-col items-center mb-10"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-content mb-4 text-center">
               Projects
@@ -102,82 +149,106 @@ export default function Main() {
             <div className="w-24 h-1 bg-gradient-to-r from-primary to-tertiary rounded-full" />
           </motion.div>
 
-          {/* Project Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-            {projects.map((project, i) => (
-              <a
-                key={i}
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
+          {/* Carousel */}
+          <div className="relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filledProjects.map((project, i) =>
+                project ? (
+                  <a
+                    key={i}
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, y: 50 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: i * 0.1 }}
+                      whileHover={{ y: -10, transition: { duration: 0.2 } }}
+                      className="group relative h-[400px] w-[350px] rounded-3xl overflow-hidden bg-surface border border-white/10 cursor-pointer my-class"
+                    >
+                      {/* Image Section */}
+                      <motion.div
+                        className="h-[180px] relative"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover"
+                          priority
+                        />
+                      </motion.div>
+
+                      {/* Content Section */}
+                      <motion.div className="p-6 h-[25px] bg-surface">
+                        <div className="flex justify-between items-start mb-4 group/title">
+                          <h3 className="text-xl font-bold text-content">
+                            {project.title}
+                          </h3>
+                          {project.isLive ? (
+                            <span className="text-green-600 glow">Live</span>
+                          ) : (
+                            <span className="text-black-600 mt-1">
+                              <FaGithub size={24} />
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-content/80 mb-4">
+                          {project.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.map((tech: any, j: number) => (
+                            <span
+                              key={j}
+                              className="px-3 py-1 rounded-full bg-white/5 text-content/80 text-sm border border-white/5 flex items-center gap-1.5"
+                            >
+                              <tech.icon
+                                style={{ color: tech.color }}
+                                className="w-4 h-4"
+                              />
+                              <span>{tech.name}</span>
+                            </span>
+                          ))}
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  </a>
+                ) : (
+                  <div key={i} className="h" /> // empty slot
+                )
+              )}
+            </div>
+
+            {/* Controls */}
+            <div className="absolute w-full -top-[15%] right-10 flex justify-end space-x-3">
+              <button
+                onClick={prevProject}
+                disabled={currentIndex === 0}
+                className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors disabled:opacity-50"
+                aria-label="Previous"
               >
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                  whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                  className="group relative h-[500px] rounded-3xl overflow-hidden bg-surface border border-white/10 cursor-pointer my-class"
-                >
-                  {/* Image Section */}
-                  <motion.div
-                    className="h-[250px] relative"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover"
-                      priority
-                    />
-                  </motion.div>
-
-                  {/* Content Section */}
-                  <motion.div
-                    className="p-6 h-[25px] bg-surface my-class"
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="flex justify-between items-start mb-4 group/title">
-                      <h3 className="text-2xl font-bold text-content">
-                        {project.title}
-                      </h3>
-                      <span className="text-green-600 glow">Live</span>
-                    </div>
-                    <p className="text-content/80 mb-4">
-                      {project.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((tech, j) => (
-                        <span
-                          key={j}
-                          className="px-3 py-1 rounded-full bg-white/5 text-content/80 text-sm border border-white/5 hover:bg-surface transition-colors flex items-center gap-1.5 group/tech"
-                        >
-                          <tech.icon
-                            style={{ color: tech.color }}
-                            className="w-4 h-4 transition-colors"
-                          />
-                          <span className="group-hover/tech:text-content transition-colors">
-                            {tech.name}
-                          </span>
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                </motion.div>
-              </a>
-            ))}
+                <FaChevronLeft />
+              </button>
+              <button
+                onClick={nextProject}
+                disabled={currentIndex + itemsPerView >= totalProjects}
+                className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors disabled:opacity-50"
+                aria-label="Next"
+              >
+                <FaChevronRight />
+              </button>
+            </div>
           </div>
-
           {/* View More Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex justify-center mt-20 relative z-[5]"
+            className="flex justify-center mt-7 relative z-[5]"
           >
             <button className="relative px-8 py-3 rounded-full bg-surface border border-white/10 hover:border-primary/10 transition-all group">
               <Link href="https://github.com/Me-V">

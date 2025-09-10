@@ -173,7 +173,7 @@ const SkillsSection = () => {
         level: 90,
         icon: <TbApi className="text-green-400" />,
       },
-      { name: "Redis", level: 80, icon: <SiRedis className="text-red-600" /> },
+
       {
         name: "Redux and Zustand (State Management)",
         level: 80,
@@ -181,7 +181,7 @@ const SkillsSection = () => {
       },
       {
         name: "FastAPI",
-        level: 85,
+        level: 80,
         icon: <SiFastapi className="text-pink-500" />,
       },
       {
@@ -191,12 +191,12 @@ const SkillsSection = () => {
       },
       {
         name: "Prisma and Mongoose",
-        level: 65,
+        level: 75,
         icon: <SiPrisma className="text-white" />,
       },
       {
         name: "JWT",
-        level: 65,
+        level: 90,
         icon: <SiJsonwebtokens className="text-pink-500" />,
       },
       {
@@ -204,6 +204,7 @@ const SkillsSection = () => {
         level: 90,
         icon: <SiClerk className="text-pink-500" />,
       },
+      { name: "Redis", level: 80, icon: <SiRedis className="text-red-600" /> },
     ],
     "ai/ml": [
       {
@@ -356,8 +357,8 @@ const SkillsSection = () => {
         return <IoCodeSlash />;
     }
   };
-  
-  console.log(isMobile)
+
+  console.log(isMobile);
 
   return (
     <section className="bg-transparent text-white pb-20 pt-10 px-4 md:px-8">
