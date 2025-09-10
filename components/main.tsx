@@ -20,7 +20,21 @@ import {
   FaGithub,
   FaNodeJs,
 } from "react-icons/fa";
+import { IconType } from "react-icons";
 
+type Tech = {
+  name: string;
+  icon: IconType;
+  color: string;
+};
+type Project = {
+  title: string;
+  description: string;
+  tech: Tech[];
+  image: string;
+  link: string;
+  isLive: boolean;
+};
 const containerStyle = {
   width: "100%",
   height: "100%",
@@ -31,7 +45,7 @@ const containerStyle = {
   backgroundPosition: "-5px -5px",
 };
 
-const projects = [
+const projects: Project[] = [
   {
     title: "Lively Docs",
     description:
@@ -201,7 +215,7 @@ export default function Main() {
                           {project.description}
                         </p>
                         <div className="flex flex-wrap gap-2">
-                          {project.tech.map((tech: any, j: number) => (
+                          {project.tech.map((tech: Tech, j: number) => (
                             <span
                               key={j}
                               className="px-3 py-1 rounded-full bg-white/5 text-content/80 text-sm border border-white/5 flex items-center gap-1.5"
