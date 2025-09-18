@@ -179,7 +179,7 @@ export default function Main() {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: i * 0.1 }}
                       whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                      className="group relative h-[400px] w-[350px] rounded-3xl overflow-hidden bg-surface border border-white/10 cursor-pointer my-class"
+                      className="group relative w-full sm:w-[350px] h-[400px] rounded-3xl overflow-hidden bg-surface border border-white/10 cursor-pointer my-class"
                     >
                       {/* Image Section */}
                       <motion.div
@@ -191,7 +191,7 @@ export default function Main() {
                           src={project.image}
                           alt={project.title}
                           fill
-                          sizes="(max-width: 768px) 100vw, 33vw"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           className="object-cover"
                           priority
                         />
@@ -238,11 +238,11 @@ export default function Main() {
             </div>
 
             {/* Controls */}
-            <div className="absolute w-full -top-[15%] right-10 flex justify-end space-x-3">
+            <div className="flex justify-center md:justify-end w-full mt-6 md:mt-0 md:absolute md:-top-[15%] md:right-10 space-x-4">
               <button
                 onClick={prevProject}
                 disabled={currentIndex === 0}
-                className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors disabled:opacity-50"
+                className="my-class p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors disabled:opacity-50"
                 aria-label="Previous"
               >
                 <FaChevronLeft />
@@ -250,7 +250,7 @@ export default function Main() {
               <button
                 onClick={nextProject}
                 disabled={currentIndex + itemsPerView >= totalProjects}
-                className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors disabled:opacity-50"
+                className="my-class p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors disabled:opacity-50"
                 aria-label="Next"
               >
                 <FaChevronRight />
